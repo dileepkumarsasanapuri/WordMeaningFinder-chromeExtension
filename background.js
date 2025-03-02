@@ -1,8 +1,5 @@
-// Check if the service worker is running
-console.log("Background script loaded!");
 
 chrome.runtime.onInstalled.addListener(() => {
-    console.log("Extension Installed - Adding Context Menu");
 
     chrome.contextMenus.create({
         id: "lookupWord",
@@ -13,7 +10,6 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === "lookupWord" && info.selectionText) {
-        console.log("Word selected:", info.selectionText);
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
             function: fetchWordMeaning,
